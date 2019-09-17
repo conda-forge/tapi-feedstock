@@ -3,8 +3,6 @@
 mkdir build
 cd build
 
-ln -s $BUILD_PREFIX/lib/libLTO.8.dylib $BUILD_PREFIX/lib/libLTO.dylib
-
 cmake \
     -G Ninja \
     -C $SRC_DIR/tapi/cmake/caches/apple-tapi.cmake \
