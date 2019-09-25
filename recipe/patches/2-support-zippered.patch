@@ -1,0 +1,24 @@
+From e92ebe1484033f91c80d9cf1a90c44f95c8c81fa Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Thomas=20P=C3=B6chtrager?= <t.poechtrager@gmail.com>
+Date: Thu, 30 May 2019 18:34:46 +0200
+Subject: [PATCH] An attempt to get TAPI platform "zippered" working #2
+
+---
+ .../projects/libtapi/tools/libtapi/LinkerInterfaceFile.cpp    | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/llvm/projects/libtapi/tools/libtapi/LinkerInterfaceFile.cpp b/src/llvm/projects/libtapi/tools/libtapi/LinkerInterfaceFile.cpp
+index b6789990e..e4952df50 100644
+--- a/src/llvm/projects/libtapi/tools/libtapi/LinkerInterfaceFile.cpp
++++ b/src/llvm/projects/libtapi/tools/libtapi/LinkerInterfaceFile.cpp
+@@ -298,6 +298,10 @@ static tapi::Platform mapPlatform(tapi::internal::Platform platform) {
+     return Platform::tvOS;
+   case tapi::internal::Platform::bridgeOS:
+     return Platform::bridgeOS;
++  case tapi::internal::Platform::iOSMac:
++    return Platform::iOSMac;
++  case tapi::internal::Platform::zippered:
++    return Platform::zippered;
+   }
+ }
+ 
