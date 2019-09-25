@@ -27,7 +27,7 @@ build:
 
 requirements:
   build:
-    - clang_bootstrap_osx-64  # [osx]
+    - clang_bootstrap_osx-64 8.*  # [osx]
     - cmake
     - ninja
   host:
