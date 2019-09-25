@@ -10,7 +10,6 @@ Feedstock license: BSD 3-Clause
 Summary: TAPI is a Text-based Application Programming Interface
 
 
-
 Current build status
 ====================
 
