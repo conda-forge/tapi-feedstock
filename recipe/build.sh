@@ -3,7 +3,7 @@
 mkdir build
 cd build
 
-ln -s $BUILD_PREFIX/lib/libLTO-9.dylib $BUILD_PREFIX/lib/libLTO.dylib
+ln -s $BUILD_PREFIX/lib/libLTO.9.dylib $BUILD_PREFIX/lib/libLTO.dylib
 ls -al $BUILD_PREFIX/lib/
 export DYLD_PRINT_LIBRARIES=1
 
