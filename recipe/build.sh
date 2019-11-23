@@ -33,6 +33,11 @@ cmake \
 if [[ "$target_platform" == osx* ]]; then
     ninja install-distribution
 else
-    ninja clangBasic libtapi || ninja clangBasic libtapi
-    ninja install-libtapi install-tapi-headers
+    set +e
+    ninja clangBasic -j${CPU_COUNT}
+    ninja clangBasic -j${CPU_COUNT}
+    ninja libtapi -j${CPU_COUNT}
+    ninja libtapi -j${CPU_COUNT}
+    set -e
+    ninja install-libtapi install-tapi-headers -j${CPU_COUNT}
 fi
