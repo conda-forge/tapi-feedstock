@@ -32,14 +32,12 @@ test:
     - test -f $PREFIX/include/tapi/tapi.h
 
 about:
-  home: https://github.com/ributzka/tapi
-  license: UIUC
+  home: https://opensource.apple.com/source/tapi
+  license: NCSA
   license_family: MIT
   license_file:
-    - tapi/LICENSE.TXT           # [osx]
-    - llvm/LICENSE.TXT           # [osx]
-    - LICENSE.APPLE-LIBTAPI.txt  # [linux]
-    - LICENSE.LLVM.txt           # [linux]
+    - LICENSE.APPLE-LIBTAPI.txt
+    - LICENSE.LLVM.txt
   summary: 'TAPI is a Text-based Application Programming Interface'
   doc_url: https://opensource.apple.com/source/tapi/tapi-{{ version }}/Readme.md
   dev_url: https://github.com/ributzka/tapi
