@@ -11,11 +11,11 @@ source:
     folder: tapi                                                               # [osx]
 
   - url: https://github.com/apple/swift-clang/archive/swift-5.0-branch.tar.gz  # [osx]
-    sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855   # [osx]
+    sha256: 1f91e385e1ed007d10a643f28ae1703c602fa0d94855ffdd3c9be48f70504439   # [osx]
     folder: clang                                                              # [osx]
 
   - url: https://github.com/apple/swift-llvm/archive/swift-5.0-branch.tar.gz   # [osx]
-    sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855   # [osx]
+    sha256: 467eb967471f5a3acf5b8d117e1fe20ffd4ed3997db766209430e150e8fc818e   # [osx]
     folder: llvm                                                               # [osx]
 
   - url: https://github.com/tpoechtrager/apple-libtapi/archive/b4f141a16c7c82f75973429c92242a8c7de3ddb1.tar.gz  # [linux]
