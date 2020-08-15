@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://github.com/tpoechtrager/apple-libtapi/archive/b4f141a16c7c82f75973429c92242a8c7de3ddb1.tar.gz
-    sha256: 812ab400c1226644d13fc0cd3bc93f7b3a85c715fa3ee532021d355ef916e735
+  - url: https://github.com/tpoechtrager/apple-libtapi/archive/bce16c61862464b3544b5b1b55103315ca2fa64f.tar.gz
+    sha256: 673ab783a1b14613abc58dca5bf3fcb05f0ddabd35c587c949661f8c499b8523
 
 build:
   number: 0
