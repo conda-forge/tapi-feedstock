@@ -1,44 +1,29 @@
 {% set name = "tapi" %}
-{% set version = "1000.10.8" %}
+{% set version = "1100.0.11" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://opensource.apple.com/tarballs/tapi/tapi-{{ version }}.tar.gz  # [osx]
-    sha256: 827e996529974305ef7933f3fa790f7ed068caa29db8f8c30b8a83c6826503f7   # [osx]
-    folder: tapi                                                               # [osx]
-    patches:                                                                   # [osx]
-      - patches/1-support-zippered.patch                                       # [osx]
-      - patches/2-support-zippered.patch                                       # [osx]
-
-  - url: https://github.com/apple/swift-clang/archive/swift-4.2-branch.tar.gz  # [osx]
-    sha256: 30db6f2f6ab90818393203bd95b409af73b876c1535bc4dec9f2554cf9e16387   # [osx]
-    folder: clang                                                              # [osx]
-
-  - url: https://github.com/apple/swift-llvm/archive/swift-4.2-branch.tar.gz   # [osx]
-    sha256: 0cd37cce5aee48d785352a1e6ae28cc80c26b99de82910d7bd5d0476ea4c5c28   # [osx]
-    folder: llvm                                                               # [osx]
-
-  - url: https://github.com/tpoechtrager/apple-libtapi/archive/cd9885b97fdff92cc41e886bba4a404c42fdf71b.tar.gz  # [linux]
-    sha256: b91b4cb52ca7f174381fb8142d1b64608e840980238b859de36476869eea9430   # [linux]
+  - url: https://github.com/tpoechtrager/apple-libtapi/archive/bce16c61862464b3544b5b1b55103315ca2fa64f.tar.gz
+    sha256: 673ab783a1b14613abc58dca5bf3fcb05f0ddabd35c587c949661f8c499b8523
 
 build:
-  number: 4
+  number: 0
   skip: True  # [win]
 
 requirements:
   build:
     - clang_bootstrap_osx-64  # [osx]
-    - {{ compiler('cxx') }}   # [linux]
+    - gxx_{{ target_platform }} 8.*   # [linux]
     - cmake
     - ninja
   host:
     - libcxx                  # [osx]
 {% if cxx_compiler_version is defined %}
   run:
-    - libcxx >={{cxx_compiler_version}}  # [osx]
+    - libcxx >={{ cxx_compiler_version }}  # [osx]
 {% endif %}
 
 test:
@@ -47,14 +32,12 @@ test:
     - test -f $PREFIX/include/tapi/tapi.h
 
 about:
-  home: https://github.com/ributzka/tapi
-  license: UIUC
+  home: https://opensource.apple.com/source/tapi
+  license: NCSA
   license_family: MIT
   license_file:
-    - tapi/LICENSE.TXT           # [osx]
-    - llvm/LICENSE.TXT           # [osx]
-    - LICENSE.APPLE-LIBTAPI.txt  # [linux]
-    - LICENSE.LLVM.txt           # [linux]
+    - LICENSE.APPLE-LIBTAPI.txt
+    - LICENSE.LLVM.txt
   summary: 'TAPI is a Text-based Application Programming Interface'
   doc_url: https://opensource.apple.com/source/tapi/tapi-{{ version }}/Readme.md
   dev_url: https://github.com/ributzka/tapi
