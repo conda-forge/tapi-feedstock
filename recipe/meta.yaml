@@ -6,20 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://opensource.apple.com/tarballs/tapi/tapi-{{ version }}.tar.gz  # [osx]
-    sha256: 1c1d7079e65c615cb12d58c1de5c49031e56774e1f17e55a57faa5d4253b9126   # [osx]
-    folder: tapi                                                               # [osx]
-
-  - url: https://github.com/apple/swift-clang/archive/swift-5.0-branch.tar.gz  # [osx]
-    sha256: 1f91e385e1ed007d10a643f28ae1703c602fa0d94855ffdd3c9be48f70504439   # [osx]
-    folder: clang                                                              # [osx]
-
-  - url: https://github.com/apple/swift-llvm/archive/swift-5.0-branch.tar.gz   # [osx]
-    sha256: 467eb967471f5a3acf5b8d117e1fe20ffd4ed3997db766209430e150e8fc818e   # [osx]
-    folder: llvm                                                               # [osx]
-
-  - url: https://github.com/tpoechtrager/apple-libtapi/archive/b4f141a16c7c82f75973429c92242a8c7de3ddb1.tar.gz  # [linux]
-    sha256: 812ab400c1226644d13fc0cd3bc93f7b3a85c715fa3ee532021d355ef916e735   # [linux]
+  - url: https://github.com/tpoechtrager/apple-libtapi/archive/b4f141a16c7c82f75973429c92242a8c7de3ddb1.tar.gz
+    sha256: 812ab400c1226644d13fc0cd3bc93f7b3a85c715fa3ee532021d355ef916e735
 
 build:
   number: 0
