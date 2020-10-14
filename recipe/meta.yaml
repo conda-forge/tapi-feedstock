@@ -15,8 +15,7 @@ build:
 
 requirements:
   build:
-    - clang_bootstra  # [osx]
-    - gxx_{{ target_platform }} 8.*   # [linux]
+    - {{ compiler('cxx') }}
     - cmake
     - ninja
   host:
