@@ -3,9 +3,13 @@
 mkdir build
 cd build
 
-EXTRA_CMAKE_ARGS="$SRC_DIR/src/llvm"
 # TODO: Fix this in a better way.
 CXXFLAGS="$CXXFLAGS -I$SRC_DIR/src/llvm/projects/clang/include -I$SRC_DIR/build/projects/clang/include"
+
+if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
+  CMAKE_ARGS="${CMAKE_ARGS} -DCROSS_TOOLCHAIN_FLAGS_NATIVE=-DCMAKE_C_COMPILER=$CC_FOR_BUILD;-DCMAKE_CXX_COMPILER=$CXX_FOR_BUILD;-DCMAKE_EXE_LINKER_FLAGS=;-DCMAKE_MODULE_LINKER_FLAGS=;-DCMAKE_SHARED_LINKER_FLAGS=;-DCMAKE_C_FLAGS=-O2;-DCMAKE_CXX_FLAGS=-O2"
+  CMAKE_ARGS="${CMAKE_ARGS} -DLLVM_HOST_TRIPLE=$(echo $HOST | sed s/conda/unknown/g) -DLLVM_DEFAULT_TARGET_TRIPLE=$(echo $HOST | sed s/conda/unknown/g)"
+fi
 
 cmake ${CMAKE_ARGS} \
     -G Ninja \
@@ -24,7 +28,7 @@ cmake ${CMAKE_ARGS} \
     -DTAPI_FULL_VERSION=11.0.0 \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DCMAKE_BUILD_TYPE=Release \
-    $EXTRA_CMAKE_ARGS
+    $SRC_DIR/src/llvm
 
 set +e
 ninja clangBasic -j${CPU_COUNT}

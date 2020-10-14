@@ -1,15 +1,17 @@
 About tapi
 ==========
 
-Home: https://github.com/ributzka/tapi
+Home: https://opensource.apple.com/source/tapi
 
-Package license: UIUC
+Package license: NCSA
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/tapi-feedstock/blob/master/LICENSE.txt)
 
 Summary: TAPI is a Text-based Application Programming Interface
 
+Development: https://github.com/ributzka/tapi
 
+Documentation: https://opensource.apple.com/source/tapi/tapi-1100.0.11/Readme.md
 
 Current build status
 ====================
@@ -68,6 +70,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7871&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tapi-feedstock?branchName=master&jobName=osx&configuration=osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=7871&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/tapi-feedstock?branchName=master&jobName=osx&configuration=osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr>
