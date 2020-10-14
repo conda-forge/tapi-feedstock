@@ -23,7 +23,7 @@ requirements:
     - libcxx                  # [osx]
 {% if cxx_compiler_version is defined %}
   run:
-    - libcxx >={{ cxx_compiler_version }}  # [osx]
+    - libcxx >={{ cxx_compiler_version }}.0.0.a0  # [osx]
 {% endif %}
 
 test:
