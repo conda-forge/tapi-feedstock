@@ -3,7 +3,6 @@
 mkdir build
 cd build
 
-EXTRA_CMAKE_ARGS="$SRC_DIR/src/llvm"
 # TODO: Fix this in a better way.
 CXXFLAGS="$CXXFLAGS -I$SRC_DIR/src/llvm/projects/clang/include -I$SRC_DIR/build/projects/clang/include"
 
@@ -24,7 +23,7 @@ cmake ${CMAKE_ARGS} \
     -DTAPI_FULL_VERSION=11.0.0 \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DCMAKE_BUILD_TYPE=Release \
-    $EXTRA_CMAKE_ARGS
+    $SRC_DIR/src/llvm
 
 set +e
 ninja clangBasic -j${CPU_COUNT}
