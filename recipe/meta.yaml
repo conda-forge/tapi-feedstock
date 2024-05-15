@@ -1,8 +1,7 @@
-{% set name = "tapi" %}
 {% set version = "1100.0.11" %}
 
 package:
-  name: {{ name|lower }}
+  name: tapi
   version: {{ version }}
 
 source:
@@ -11,7 +10,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [win]
+  skip: true  # [win]
 
 requirements:
   build:
