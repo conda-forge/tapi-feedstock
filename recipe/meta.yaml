@@ -1,12 +1,13 @@
-{% set version = "1100.0.11" %}
+{% set version = "1300.6.5" %}
 
 package:
   name: tapi
   version: {{ version }}
 
 source:
-  - url: https://github.com/tpoechtrager/apple-libtapi/archive/bce16c61862464b3544b5b1b55103315ca2fa64f.tar.gz
-    sha256: 673ab783a1b14613abc58dca5bf3fcb05f0ddabd35c587c949661f8c499b8523
+  # latest commit from branch called `{{ version }}`
+  - url: https://github.com/tpoechtrager/apple-libtapi/archive/b8c5ac40267aa5f6004dd38cc2b2cd84f2d9d555.tar.gz
+    sha256: 3b75098ee01571102e605c76b219075c607df0dd459e65fc04cb282fbe7c65cb
 
 build:
   number: 0
