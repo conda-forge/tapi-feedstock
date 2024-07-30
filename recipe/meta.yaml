@@ -17,6 +17,9 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
+    # C-compiler only for bin/x86_64-conda-linux-gnu-cc symlink;
+    # cannot add this on osx because of circular dependence
+    - {{ compiler('c') }}   # [linux]
     - cmake
     - ninja
   host:
