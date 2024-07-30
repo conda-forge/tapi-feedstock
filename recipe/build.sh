@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 mkdir build
 cd build
@@ -13,16 +14,8 @@ fi
 
 cmake ${CMAKE_ARGS} \
     -G Ninja \
-    -DCMAKE_INSTALL_PREFIX=$PREFIX \
-    -DCMAKE_C_COMPILER=$CC \
-    -DCMAKE_CXX_COMPILER=$CXX \
     -DCMAKE_ASM_COMPILER=$CC \
-    -DCMAKE_LIBTOOL=$LIBTOOL \
-    -DCMAKE_AR=$AR \
-    -DCMAKE_NM=$NM \
-    -DCMAKE_RANLIB=$RANLIB \
-    -DCMAKE_STRIP=$STRIP \
-    -DCMAKE_INSTALL_NAME_TOOL=$INSTALL_NAME_TOOL \
+    -DCMAKE_NM=$BUILD_PREFIX/bin/$NM \
     -DTAPI_REPOSITORY_STRING=tapi-${PKG_VERSION} \
     -DLLVM_ENABLE_PROJECTS="tapi;clang" \
     -DLLVM_TARGETS_TO_BUILD=host \
