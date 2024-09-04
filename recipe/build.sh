@@ -27,6 +27,7 @@ cmake ${CMAKE_ARGS} \
     -DLLVM_ENABLE_PROJECTS="tapi;clang" \
     -DLLVM_TARGETS_TO_BUILD=host \
     -DTAPI_FULL_VERSION=${PKG_VERSION} \
+    -DTAPI_VENDOR="conda-forge " \
     -DCLANG_INCLUDE_TESTS=OFF \
     -DLLVM_INCLUDE_TESTS=OFF \
     -DCMAKE_BUILD_TYPE=Release \
