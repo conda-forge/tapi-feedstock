@@ -23,7 +23,7 @@ cmake ${CMAKE_ARGS} \
     -G Ninja \
     -DCMAKE_ASM_COMPILER=$CC \
     -DCMAKE_NM=$BUILD_PREFIX/bin/$NM \
-    -DTAPI_REPOSITORY_STRING=tapi-${PKG_VERSION} \
+    -DTAPI_REPOSITORY_STRING="https://github.com/tpoechtrager/apple-libtapi/commit/$GIT_COMMIT" \
     -DLLVM_ENABLE_PROJECTS="tapi;clang" \
     -DLLVM_TARGETS_TO_BUILD=host \
     -DTAPI_FULL_VERSION=${PKG_VERSION} \
