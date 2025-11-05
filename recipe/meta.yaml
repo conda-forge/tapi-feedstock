@@ -1,5 +1,5 @@
-{% set version = "1300.6.5" %}
-{% set commit = "b8c5ac40267aa5f6004dd38cc2b2cd84f2d9d555" %}
+{% set version = "1600.0.11.8" %}
+{% set commit = "aed9334283e3e290bba622ee980bde2322e4d516" %}
 
 package:
   name: tapi
@@ -8,7 +8,7 @@ package:
 source:
   # latest commit from branch called `{{ version }}`
   - url: https://github.com/tpoechtrager/apple-libtapi/archive/{{ commit }}.tar.gz
-    sha256: 3b75098ee01571102e605c76b219075c607df0dd459e65fc04cb282fbe7c65cb
+    sha256: f244f7b3d8de3277204dece255b531f976bee80dad3247e9f36b30052b91c959
 
 build:
   number: 0
