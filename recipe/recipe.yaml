@@ -12,6 +12,9 @@ source:
   # latest commit from branch called `{{ version }}`
   - url: https://github.com/tpoechtrager/apple-libtapi/archive/${{ commit }}.tar.gz
     sha256: 70163763a8974ea23c7a8ad026a7fdf7e869d38040660c112b18d172708b05ec
+    patches:
+      # fix issues in upstream CMake files
+      - patches/cmake-fix.patch
 
 build:
   number: 0

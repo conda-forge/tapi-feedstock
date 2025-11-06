@@ -4,9 +4,6 @@ set -x
 mkdir build
 cd build
 
-# TODO: Fix this in a better way.
-CXXFLAGS="$CXXFLAGS -I$SRC_DIR/src/llvm/projects/clang/include -I$SRC_DIR/build/projects/clang/include"
-
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   NATIVE_FLAGS="-DCMAKE_C_COMPILER=$CC_FOR_BUILD;-DCMAKE_CXX_COMPILER=$CXX_FOR_BUILD"
   NATIVE_FLAGS="${NATIVE_FLAGS};-DCMAKE_C_FLAGS=-O2;-DCMAKE_CXX_FLAGS=-O2"
@@ -30,6 +27,9 @@ cmake ${CMAKE_ARGS} \
     -DTAPI_VENDOR="conda-forge " \
     -DCLANG_INCLUDE_TESTS=OFF \
     -DLLVM_INCLUDE_TESTS=OFF \
+    -DLLVM_INCLUDE_DOCS=OFF \
+    -DLLVM_INCLUDE_BENCHMARKS=OFF \
+    -DLLVM_INCLUDE_EXAMPLES=OFF \
     -DCMAKE_BUILD_TYPE=Release \
     $SRC_DIR/src/llvm
 
