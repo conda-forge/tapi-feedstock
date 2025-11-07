@@ -11,7 +11,7 @@ Summary: TAPI is a Text-based Application Programming Interface
 
 Development: https://github.com/ributzka/tapi
 
-Documentation: https://opensource.apple.com/source/tapi/tapi-1500.0.12.3/Readme.md
+Documentation: https://opensource.apple.com/source/tapi/tapi-1600.0.11.8/Readme.md
 
 Current build status
 ====================
