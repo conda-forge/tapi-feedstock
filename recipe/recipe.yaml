@@ -18,6 +18,9 @@ source:
       # backport of
       # https://github.com/llvm/llvm-project/commit/d54dfdd1b53ff72344287d250c2b67329792c840
       - patches/gcc-14-arm.patch
+      # add missing GetDarwinLinkerVersion.cmake; from
+      # https://github.com/llvm/llvm-project/commit/3bc71c2abfa00413fd15cf0e5c08af6ec0d4768b
+      - patches/cmake-darwin-linker.patch
 
 build:
   number: 0
