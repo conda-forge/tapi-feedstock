@@ -15,6 +15,9 @@ source:
     patches:
       # fix issues in upstream CMake files
       - patches/cmake-fix.patch
+      # backport of
+      # https://github.com/llvm/llvm-project/commit/d54dfdd1b53ff72344287d250c2b67329792c840
+      - patches/gcc-14-arm.patch
 
 build:
   number: 0
