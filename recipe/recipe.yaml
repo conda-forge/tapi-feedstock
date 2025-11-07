@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: 1500.0.12.3
-  commit: fbe6e2ae9dab1768ffb22a0d64d525fb7bdf9be6
+  version: 1600.0.11.8
+  commit: aed9334283e3e290bba622ee980bde2322e4d516
 
 package:
   name: tapi
@@ -11,7 +11,7 @@ package:
 source:
   # latest commit from branch called `{{ version }}`
   - url: https://github.com/tpoechtrager/apple-libtapi/archive/${{ commit }}.tar.gz
-    sha256: 70163763a8974ea23c7a8ad026a7fdf7e869d38040660c112b18d172708b05ec
+    sha256: f244f7b3d8de3277204dece255b531f976bee80dad3247e9f36b30052b91c959
     patches:
       # fix issues in upstream CMake files
       - patches/cmake-fix.patch
