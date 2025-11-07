@@ -36,8 +36,8 @@ cmake ${CMAKE_ARGS} \
     $SRC_DIR/src/llvm
 
 set +e
-ninja clangBasic -j${CPU_COUNT}
-ninja clangBasic -j${CPU_COUNT}
+ninja clangBasic vt_gen -j${CPU_COUNT}
+ninja clangBasic vt_gen -j${CPU_COUNT}
 ninja libtapi -j${CPU_COUNT}
 ninja libtapi -j${CPU_COUNT}
 set -e
