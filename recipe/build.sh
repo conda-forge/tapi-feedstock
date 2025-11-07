@@ -35,10 +35,6 @@ cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release \
     $SRC_DIR/src/llvm
 
-set +e
-ninja clangBasic vt_gen -j${CPU_COUNT}
 ninja clangBasic vt_gen -j${CPU_COUNT}
 ninja libtapi -j${CPU_COUNT}
-ninja libtapi -j${CPU_COUNT}
-set -e
 ninja install-libtapi install-tapi-headers -j${CPU_COUNT}
