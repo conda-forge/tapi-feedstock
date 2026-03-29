@@ -21,9 +21,12 @@ source:
       # add missing GetDarwinLinkerVersion.cmake; from
       # https://github.com/llvm/llvm-project/commit/3bc71c2abfa00413fd15cf0e5c08af6ec0d4768b
       - patches/cmake-darwin-linker.patch
+      # fall back to arm64e slice when arm64 is missing from .tbd files;
+      # macOS 26+ SDKs only ship arm64e slices (conda-forge/tapi-feedstock#16)
+      - patches/arm64e-fallback.patch
 
 build:
-  number: 0
+  number: 1
   skip: win
   script:
     env:
