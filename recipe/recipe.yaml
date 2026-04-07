@@ -2,8 +2,7 @@ schema_version: 1
 
 context:
   version: 1600.0.11.8
-  commit: aed9334283e3e290bba622ee980bde2322e4d516
-
+  commit: 593d29141bf176d24021208c75af54a2ef23c38b
 package:
   name: tapi
   version: ${{ version }}
@@ -11,7 +10,7 @@ package:
 source:
   # latest commit from branch called `{{ version }}`
   - url: https://github.com/tpoechtrager/apple-libtapi/archive/${{ commit }}.tar.gz
-    sha256: f244f7b3d8de3277204dece255b531f976bee80dad3247e9f36b30052b91c959
+    sha256: dbad2a41f2351b052367db1fe251bebe43ee9ca5815e46b725c4bc71c339186f
     patches:
       # fix issues in upstream CMake files
       - patches/cmake-fix.patch
@@ -21,12 +20,9 @@ source:
       # add missing GetDarwinLinkerVersion.cmake; from
       # https://github.com/llvm/llvm-project/commit/3bc71c2abfa00413fd15cf0e5c08af6ec0d4768b
       - patches/cmake-darwin-linker.patch
-      # fall back to arm64e slice when arm64 is missing from .tbd files;
-      # macOS 26+ SDKs only ship arm64e slices (conda-forge/tapi-feedstock#16)
-      - patches/arm64e-fallback.patch
 
 build:
-  number: 1
+  number: 2
   skip: win
   script:
     env:
