@@ -20,9 +20,11 @@ source:
       # add missing GetDarwinLinkerVersion.cmake; from
       # https://github.com/llvm/llvm-project/commit/3bc71c2abfa00413fd15cf0e5c08af6ec0d4768b
       - patches/cmake-darwin-linker.patch
+      # fix for unknown archs like arm64e.x1
+      - patches/0001-apple-libtapi-skip-unrecognized-architecture-slices-in-tbd.patch
 
 build:
-  number: 3
+  number: 4
   skip: win
   script:
     env:
