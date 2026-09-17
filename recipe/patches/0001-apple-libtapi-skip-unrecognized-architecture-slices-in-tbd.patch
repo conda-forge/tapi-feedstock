@@ -1,0 +1,103 @@
+From 488b10fca2180a37ef40f0b7f23067b94dd367e5 Mon Sep 17 00:00:00 2001
+From: Isuru Fernando <isuruf@gmail.com>
+Date: Thu, 17 Sep 2026 10:10:59 -0700
+Subject: [PATCH] TextAPI: skip unrecognized architecture slices in tbd targets
+ lists
+
+Xcode 27 SDKs introduce an arm64e.x1 architecture slice that this
+reader doesn't know about yet. Previously, any target string with an
+unrecognized architecture (ScalarTraits<Target>::input) caused the
+whole tbd file to be rejected as malformed, which broke parsing of
+libSystem.tbd and other SDK stubs entirely.
+
+Instead, accept such targets during parsing and drop them once each
+"targets" list has been read, mirroring how ScalarTraits<Architecture>
+and ArchitectureSet already tolerate unknown architectures elsewhere
+in this reader. This lets the rest of the file's declarations for
+recognized architectures still be used.
+
+Fixes: https://github.com/tpoechtrager/cctools-port/issues/193
+---
+ src/llvm/lib/TextAPI/TextStub.cpp | 24 ++++++++++++++++++++++--
+ 1 file changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/src/llvm/lib/TextAPI/TextStub.cpp b/src/llvm/lib/TextAPI/TextStub.cpp
+index 5c614aa72..93ebfc358 100644
+--- a/src/llvm/lib/TextAPI/TextStub.cpp
++++ b/src/llvm/lib/TextAPI/TextStub.cpp
+@@ -13,6 +13,7 @@
+ #include "TextAPIContext.h"
+ #include "TextStubCommon.h"
+ #include "llvm/ADT/BitmaskEnum.h"
++#include "llvm/ADT/STLExtras.h"
+ #include "llvm/ADT/SmallString.h"
+ #include "llvm/ADT/StringRef.h"
+ #include "llvm/Support/Allocator.h"
+@@ -273,6 +274,18 @@ LLVM_YAML_IS_SEQUENCE_VECTOR(UUIDv4)
+ namespace llvm {
+ namespace yaml {
+ 
++// Drop targets referring to an architecture this reader doesn't recognize
++// (e.g. a new arch introduced by a later Xcode release, such as
++// arm64e.x1). This keeps a single unrecognized slice in a tbd file's
++// "targets" list from making the whole file unusable.
++template <typename TargetContainerT>
++static void pruneUnknownArchTargets(IO &IO, TargetContainerT &Targets) {
++  if (IO.outputting())
++    return;
++  llvm::erase_if(Targets,
++                 [](const Target &T) { return T.Arch == AK_unknown; });
++}
++
+ template <> struct MappingTraits<ExportSection> {
+   static void mapping(IO &IO, ExportSection &Section) {
+     const auto *Ctx = reinterpret_cast<TextAPIContext *>(IO.getContext());
+@@ -314,6 +327,7 @@ template <> struct MappingTraits<UndefinedSection> {
+ template <> struct MappingTraits<SymbolSection> {
+   static void mapping(IO &IO, SymbolSection &Section) {
+     IO.mapRequired("targets", Section.Targets);
++    pruneUnknownArchTargets(IO, Section.Targets);
+     IO.mapOptional("symbols", Section.Symbols);
+     IO.mapOptional("objc-classes", Section.Classes);
+     IO.mapOptional("objc-eh-types", Section.ClassEHs);
+@@ -326,6 +340,7 @@ template <> struct MappingTraits<SymbolSection> {
+ template <> struct MappingTraits<UmbrellaSection> {
+   static void mapping(IO &IO, UmbrellaSection &Section) {
+     IO.mapRequired("targets", Section.Targets);
++    pruneUnknownArchTargets(IO, Section.Targets);
+     IO.mapRequired("umbrella", Section.Umbrella);
+   }
+ };
+@@ -342,6 +357,7 @@ struct MappingContextTraits<MetadataSection, MetadataSection::Option> {
+   static void mapping(IO &IO, MetadataSection &Section,
+                       MetadataSection::Option &OptionKind) {
+     IO.mapRequired("targets", Section.Targets);
++    pruneUnknownArchTargets(IO, Section.Targets);
+     switch (OptionKind) {
+     case MetadataSection::Option::Clients:
+       IO.mapRequired("clients", Section.Values);
+@@ -386,8 +402,11 @@ template <> struct ScalarTraits<Target> {
+     }
+ 
+     Value = *Result;
+-    if (Value.Arch == AK_unknown)
+-      return "unknown architecture";
++    // Some SDKs reference architecture slices this reader doesn't know about
++    // yet (e.g. a new arch introduced by a later Xcode release). Accept the
++    // target here instead of treating the whole tbd file as malformed; the
++    // unrecognized target is dropped once parsing of the enclosing list
++    // completes (see pruneUnknownArchTargets).
+     if (Value.Platform == PLATFORM_UNKNOWN)
+       return "unknown platform";
+ 
+@@ -1020,6 +1039,7 @@ template <> struct MappingTraits<const InterfaceFile *> {
+     IO.mapTag("!tapi-tbd", true);
+     IO.mapRequired("tbd-version", Keys->TBDVersion);
+     IO.mapRequired("targets", Keys->Targets);
++    pruneUnknownArchTargets(IO, Keys->Targets);
+     IO.mapOptional("uuids", EmptyUUID);
+     IO.mapOptional("flags", Keys->Flags, TBDFlags::None);
+     IO.mapRequired("install-name", Keys->InstallName);
+-- 
+2.53.GIT
+
